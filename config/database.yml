@@ -1,0 +1,23 @@
+default: &default
+  adapter: postgresql
+  database: basic_api_consumer_database
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  timeout: 5000
+
+development:
+  adapter: postgresql
+  database: basic_api_consumer_database
+  pool: 5
+  timeout: 5000
+
+test:
+  adapter: postgresql
+  database: basic_api_consumer_database_test
+  pool: 5
+  timeout: 5000
+
+production:
+  adapter: postgresql
+  database: basic_api_consumer_database
+  pool: 5
+  timeout: 5000
