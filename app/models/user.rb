@@ -1,6 +1,19 @@
 # include HTTParty
 
 class User
+
+  def self.get_auth(email, password)
+    # return nil unless id.present?
+
+    response = HTTParty.post(
+      "http://localhost:3000/auth/login",
+      body: {"email": "#{email}", "password": "#{password}"}.to_json,
+      headers: {
+        'Content-Type' => 'application/json'
+      } 
+    )
+    response['auth_token']
+  end
   
   def self.find(id)
     return nil unless id.present?
@@ -9,7 +22,7 @@ class User
       "http://localhost:3000/todos/#{id}/",
       headers: {
         'Content-Type' => 'application/json', 
-        'Authorization' => 'eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE1Njg3MzI0NDd9.1TN_Rp1XyFNYuGJMZrqiwJnXWu9vyXHWM_k4esn_DvM'
+        'Authorization' => session[:auth_token]
       } 
     )
 
