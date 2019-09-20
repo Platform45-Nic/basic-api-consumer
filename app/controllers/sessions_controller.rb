@@ -4,17 +4,17 @@ class SessionsController < ApplicationController
   end
 
   def create
-    binding.pry
-    @session = Session.new(session_params)
-    if @session.save
+    if @session = session_params
       response = HTTParty.post(
         "http://localhost:3000/auth/login",
-        body: {"email": "#{email.to_s}", "password": "#{password.to_s}"}.to_json,
+        body: {"email": "#{@session[:email]}", "password": "#{@session[:password]}"}.to_json,
         headers: {
           'Content-Type' => 'application/json'
         } 
       )
-      response['auth_token']
+      Session.new(session_id: response['auth_token']).save
+      @session_id = Session.find_by(session_id: response['auth_token'])
+      session[:current_user_id] = @session_id.id
       redirect_to root_path
     else
       render 'new'
@@ -29,7 +29,7 @@ class SessionsController < ApplicationController
   private
 
   def session_params
-    params
+    params.permit(:email, :password)
   end
 
 end
