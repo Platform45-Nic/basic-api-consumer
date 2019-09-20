@@ -22,8 +22,15 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    session.delete(:current_user_id)
-    @current_user_id = nil
+    if logged_in = Session.find_by(id: session[:current_user_id])
+      logged_in.destroy
+      session.delete(:current_user_id)
+      @current_user_id = nil
+    elsif logged_in = User.find_by(id: session[:current_user_id])
+      logged_in.destroy
+      session.delete(:current_user_id)
+      @current_user_id = nil
+    end
   end
 
   private

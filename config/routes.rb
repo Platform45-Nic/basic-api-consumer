@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   get 'index', to: 'users#index'
   resources :sessions, only:[:new, :create, :destroy]
+  resources :users, only:[:new, :create, :destroy]
   # post '/sessions', to: 'sessions#create'
   # post '/sessions/new', to: 'sessions#new'
   # get '/sessions/new', to: 'sessions#new'
