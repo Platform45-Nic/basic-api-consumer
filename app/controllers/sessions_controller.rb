@@ -22,21 +22,29 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    if logged_in = Session.find_by(id: session[:current_user_id])
-      logged_in.destroy
-      session.delete(:current_user_id)
-      @current_user_id = nil
-    elsif logged_in = User.find_by(id: session[:current_user_id])
-      logged_in.destroy
-      session.delete(:current_user_id)
-      @current_user_id = nil
-    end
+    delete_session
   end
 
   private
 
   def session_params
     params.permit(:email, :password)
+  end
+
+  def delete_session
+    if logged_in = Session.find_by(id: session[:current_user_id])
+      logged_in.destroy
+      session.delete(:current_user_id)
+      @current_user_id = nil
+      redirect_to root_path
+    elsif logged_in = User.find_by(id: session[:current_user_id])
+      logged_in.destroy
+      session.delete(:current_user_id)
+      @current_user_id = nil
+      redirect_to root_path
+    else
+      redirect_to root_path
+    end
   end
 
 end
