@@ -1,6 +1,6 @@
 class TodosController < ApplicationController
   def index
-    auth_token = Session.find_by(id: session[:current_user_id])
+    auth_token = Session.find_by(id: session[:current_user_id]).session_id
     @response = HTTParty.get(
       "http://localhost:3000/todos",
       headers: {
