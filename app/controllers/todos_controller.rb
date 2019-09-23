@@ -8,9 +8,8 @@ class TodosController < ApplicationController
         'Authorization' => "#{auth_token}"
       } 
     )
-  end
-
-  def show
+    @todo_list = @response.find{|h| h}.select{|s,v| s == "items"}.to_a[0][1]
+    binding.pry
   end
 
 end

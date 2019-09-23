@@ -1,3 +1,10 @@
 h1 Here are the Todos:
 = @response
 br
+h2 Test data below
+br/
+- @todo_list.each do |list|
+  = list["id"]
+  = list["name"]
+  = list["todo_id"]
+  br
