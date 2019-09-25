@@ -14,14 +14,27 @@ html
           th
             | Item ID No.
       tbody
-        - @todo_list.each do |todo|
+        - @response.each do |todo|
           tr
             td
-              = todo["name"]
+              = todo["title"]
+              / = link_to "#{todo["title"]}", todo_path(@current_todo)
             td
               = todo["id"]
     br/
-    h2 Here are the Todos in raw format
-    = @response
+    / h2 Here are the Todos in raw format
+    / - @response.each do |r|
+    /   li
+    /     = r["id"]
+    /     = r["title"]
+    /     = r["created_by"]
+    /     = r["created_at"]
+    /     = r["updated_at"]
+    /     = r["items"]
+    /     br/
     br/
-    br/
+    h2 Todo Array using Enumerable:
+    - @enum.each do |e|
+      li
+        = e
+        br/

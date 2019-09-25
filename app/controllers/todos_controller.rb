@@ -9,6 +9,9 @@ class TodosController < ApplicationController
       } 
     )
     @todo_list = @response.find{|h| h}.select{|s,v| s == "items"}.to_a[0][1]
+    @enum = @response
+    # @current_todo = Todo.find_by(title: todo['title'])
+    # binding.pry
   end
 
   def show
