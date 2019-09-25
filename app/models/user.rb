@@ -1,3 +1,4 @@
-class User < ApplicationRecord
-  include HHTParty
+include HTTParty
+
+class User
 end

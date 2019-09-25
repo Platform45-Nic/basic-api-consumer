@@ -1,0 +1,29 @@
+html
+  head
+    style
+      | table, td { border: 0.5px solid black; text-align: center; }
+    title
+      | Todo Show View
+  body
+    h1 Test Show table below
+    p
+      | Raw Data:
+      br/
+      = @todo_list
+      br
+    table
+      thead
+        tr
+          th
+            | Todo Title Name:
+          th
+            | Item ID No.
+      tbody
+        - @todo_list.each do |todo|
+          tr
+            td
+              = todo["title"]
+            td
+              = todo["id"]
+    br/
+    br/

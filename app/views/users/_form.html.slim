@@ -1,15 +1,17 @@
-= form_for @user do |f|
-  - if @user.errors.any?
-    #error_explanation
-      h2 = "#{pluralize(@user.errors.count, "error")} prohibited this user from being saved:"
-      ul
-        - @user.errors.full_messages.each do |message|
-          li = message
-
-  .field
-    = f.label :task_text, "Task:"
-    = f.text_field :task_text
-  .field
-    = f.label :done
-    = f.check_box :done
-  .actions = f.submit
+= form_tag users_path , method: :post do |f|
+  | Name: 
+  br/
+  input name="name" type="text" /
+  | Email: 
+  br/
+  input name="email" type="text" /
+  | Password: 
+  br/
+  input name="password" type="password" /
+  br/
+  | Password Confirmation:
+  br/
+  input name="password_confirmation" type="password" /
+  br/
+  br/
+  input type="submit" value="Submit" /

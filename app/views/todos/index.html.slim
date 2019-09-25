@@ -1,0 +1,40 @@
+html
+  head
+    style
+      | table, td { border: 0.5px solid black; text-align: center; }
+    title
+      | Todo Index View
+  body
+    h1 Test table below
+    table
+      thead
+        tr
+          th
+            | Name
+          th
+            | Item ID No.
+      tbody
+        - @response.each do |todo|
+          tr
+            td
+              = todo["title"]
+              / = link_to "#{todo["title"]}", todo_path(@current_todo)
+            td
+              = todo["id"]
+    br/
+    / h2 Here are the Todos in raw format
+    / - @response.each do |r|
+    /   li
+    /     = r["id"]
+    /     = r["title"]
+    /     = r["created_by"]
+    /     = r["created_at"]
+    /     = r["updated_at"]
+    /     = r["items"]
+    /     br/
+    br/
+    h2 Todo Array using Enumerable:
+    - @enum.each do |e|
+      li
+        = e
+        br/
