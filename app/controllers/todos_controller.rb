@@ -21,6 +21,7 @@ class TodosController < ApplicationController
       } 
     )
     @todo_list = @response
+    # binding.pry
   end
 
   def new

@@ -1,10 +1,10 @@
-- if true
+- if session[:current_user_id]
     br
-    |  Logged in as:
+    |  Session Id:
     strong
     |
     br
-    = link_to "Login", new_session_path
+    = session[:current_user_id]
     br
     = link_to "Todo Index", todo_index_path
     br

@@ -15,14 +15,14 @@ html
       thead
         tr
           th
-            | Name
+            | Todo Title Name:
           th
             | Item ID No.
       tbody
         - @todo_list.each do |todo|
           tr
             td
-              = todo["name"]
+              = todo["title"]
             td
               = todo["id"]
     br/
