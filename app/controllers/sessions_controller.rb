@@ -15,7 +15,7 @@ class SessionsController < ApplicationController
       Session.new(session_id: response['auth_token']).save
       @session_id = Session.find_by(session_id: response['auth_token'])
       session[:current_user_id] = @session_id.id
-      redirect_to root_path
+      redirect_to todo_index_path
     else
       render 'new'
     end

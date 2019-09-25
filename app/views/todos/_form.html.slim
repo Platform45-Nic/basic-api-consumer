@@ -1,11 +1,6 @@
-= form_tag sessions_path , method: :post do |f|
-  | Email: 
+= form_tag todos_path , method: :post do |f|
+  | Todo Title: 
   br/
-  input name="email" type="text" /
-  br/
-  | Password:
-  br/
-  input name="password" type="password" /
-  br/
+  input name="title" type="text" /
   br/
   input type="submit" value="Submit" /

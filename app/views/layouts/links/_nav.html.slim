@@ -1,9 +1,19 @@
-  = link_to "Login", new_session_path
-  br
-  = link_to "Todo Index", todos_path
-  br
-  = link_to "Create Todo", todos_path
-  br
-  = link_to "Home", root_path
-  br
-  = link_to "Logout", logout_path, method: :delete
+- if true
+    br
+    |  Logged in as:
+    strong
+    |
+    br
+    = link_to "Login", new_session_path
+    br
+    = link_to "Todo Index", todo_index_path
+    br
+    = link_to "Create Todo", new_todo_path
+    br
+    = link_to "Home", root_path
+    br
+    = link_to "Logout", logout_path, method: :delete
+- else
+    = link_to "Login", new_session_path
+    br
+  
