@@ -1,6 +1,6 @@
 class TodosController < ApplicationController
   def index
-    auth_token = Session.find_by(id: session[:current_user_id]).session_id
+    auth_token
     @response = HTTParty.get(
       "http://localhost:3000/todos",
       headers: {
@@ -15,7 +15,7 @@ class TodosController < ApplicationController
   end
 
   def show
-    auth_token = Session.find_by(id: session[:current_user_id]).session_id
+    auth_token
     @response = HTTParty.get(
       "http://localhost:3000/todos/#{@current_todo}",
       headers: {
@@ -24,6 +24,7 @@ class TodosController < ApplicationController
       } 
     )
     @todo_list = @response
+    # Above is only temporary
     # binding.pry
   end
 
@@ -32,7 +33,7 @@ class TodosController < ApplicationController
   end
 
   def create
-    auth_token = Session.find_by(id: session[:current_user_id]).session_id
+    auth_token
     if @todo = todos_params
       @response = HTTParty.post(
         "http://localhost:3000/todos",
@@ -43,14 +44,19 @@ class TodosController < ApplicationController
         } 
       )
       Todo.new(title: @response['title'], todo_id: @response['id']).save
-      @current_todo = Todo.find_by(title: @response['title'])
-      redirect_to todo_path(@current_todo)
+      @current_todo = Todo.find_by(todo_id: @response['id'])
+      redirect_to todo_path(@current_todo.id)
+      # binding.pry
     else
       render 'new'
     end
   end
 
   private
+
+  def auth_token
+    Session.find_by(id: session[:current_user_id]).session_id
+  end
 
   def todos_params
     params.permit(:title)

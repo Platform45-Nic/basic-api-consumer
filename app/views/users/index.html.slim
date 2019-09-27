@@ -1,4 +1,5 @@
 h2 Test API return
 br
-- @user.each do |userapi|
-  = userapi
+- if @user.present?
+    - @user.each do |userapi|
+      = userapi
