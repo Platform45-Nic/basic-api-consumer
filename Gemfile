@@ -18,7 +18,7 @@ gem 'will_paginate', '3.1.7'
 gem 'bootstrap-sass'
 gem 'jquery-rails'
 gem 'bootstrap_form'
-gem 'httparty', '0.17.0'
+gem 'httparty', '0.21.0'
 
 group :development, :test do
   gem 'pry'
